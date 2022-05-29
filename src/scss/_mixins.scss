@@ -1,0 +1,11 @@
+@mixin base-text($color) {
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: $color;
+}
+
+@mixin min-text($color) {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: $color;
+}

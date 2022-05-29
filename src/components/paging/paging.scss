@@ -1,0 +1,36 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  &-left {
+    max-width: 1100px;
+  }
+
+  &-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-item {
+    display: block;
+  }
+
+  &-btn {
+    margin-right: 5px;
+    padding: 2.5px 7.5px;
+  }
+
+  &-text {
+    @include min-text($shadow);
+  }
+}
+
+.btn {
+
+  &-back, 
+  &-forward {
+    padding: 2.5px 10px;
+  }
+}
