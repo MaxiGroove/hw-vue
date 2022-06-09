@@ -35,7 +35,8 @@ fieldset {
 }
 
 a {
-  text-decoration: none;
+  all: unset;
+  cursor: pointer;
 }
 
 button {
@@ -48,3 +49,5 @@ button {
   color: $label-color;
   font-size: 1.4rem;
 }
+
+

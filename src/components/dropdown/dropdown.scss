@@ -1,12 +1,13 @@
 .dropdown {
   position: relative;
 
-  // &-active {
-  //   border: 1px solid $primary-color;
-  //   box-shadow: 0px 0px 2px 2px rgba(123, 97, 255, 0.5);
-  //   border-radius: 3px;
-  //   padding: 5px;
-  // }
+  &-active {
+    position: absolute;
+    border: 1px solid $primary-color;
+    box-shadow: 0px 0px 2px 2px rgba(123, 97, 255, 0.5);
+    border-radius: 3px;
+    padding: 5px;
+  }
 
   &-type {
     height: 24px;
@@ -22,66 +23,40 @@
 
     background: #FFFFFF;
     border: 1px solid transparent;
-    box-shadow: inset 0px 0px 2px 1px #B5B5B5;
+    box-shadow: inset 0px 0px 2px 1px $shadow;
     border-radius: 3px;
 
     &:hover {
       color: $main-color;
       border: 1px solid $primary-color;
-      box-shadow: inset 0px 0px 2px 1px #B5B5B5;
+      box-shadow: inset 0px 0px 2px 1px $shadow;
     }
 
-    &-type {
+    &.type {
       width: 98px;
     }
 
-    &-assignedUsers {
+    &.assignedUsers {
       width: 180px;
     }
 
-    &-status {
+    &.status {
       width: 120px;
     }
 
-    &-rank {
+    &.rank {
       width: 120px;
-    }
-
-    &-active {
-      color: $main-color;
-      border: 1px solid $primary-color;
-      box-shadow: 0px 0px 2px 2px rgba(123, 97, 255, 0.5);
-    }
-
-  }
-
-  &-arrow {
-    display: block;
-  }
-
-  &-wrap {
-    display: none;
-
-    &-active {
-      height: 100vh;
-      width: 100vw;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
     }
   }
 
   &-list {
-    display: none;
+    position: absolute;
+    background: #ffffff;
+    z-index: 10;
 
-    &-active {
-      display: block;
-      position: absolute;
-      z-index: 10;
-      background: #ffffff;
-    }
+    border: 1px solid $primary-color;
+    border-top-color: transparent;
+    box-shadow: 0px 0px 2px 2px rgba(123, 97, 255, 0.5);
+    border-radius: 0 0 3px 3px;
   }
-
 }

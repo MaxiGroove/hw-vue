@@ -1,13 +1,13 @@
 <template>
-  <button class="btn-primary">Кнопка</button>
+  <button v-on="$listeners">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>
-@import './button.scss';
+@import "./button.scss";
 </style>

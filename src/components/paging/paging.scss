@@ -26,11 +26,3 @@
     @include min-text($shadow);
   }
 }
-
-.btn {
-
-  &-back, 
-  &-forward {
-    padding: 2.5px 10px;
-  }
-}

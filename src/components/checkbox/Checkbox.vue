@@ -1,20 +1,27 @@
 <template>
-  <div class="dropdown-checkbox checkbox-rank">
-    <div className="checkbox">
+  <div class="dropdown-checkbox checkbox">
+    <div class="">
       <input
         type="checkbox"
         class="checkbox-input"
-        id="1"
-        name="1"
-        value="1"
+        v-bind:id="item"
+        v-bind:value="item"
+        v-on="$listeners"
       />
-      <label class="checkbox-label" for="1">Исполнитель</label>
+      <label class="checkbox-label" v-bind:for="item"><slot></slot></label>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    item: String,
+  },
+  model: {
+    event: "changed",
+  },
+};
 </script>
 
 <style lang="scss" scoped>

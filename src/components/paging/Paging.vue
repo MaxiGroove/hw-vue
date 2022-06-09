@@ -3,15 +3,23 @@
     <div class="pagination-left">
       <ul class="pagination-items">
         <li class="pagination-item">
-          <button class="pagination-btn btn-back btn-disabled">Назад</button>
+          <Button class="btn-pagination btn-back btn-disabled"
+            >Назад</Button
+          >
         </li>
 
         <li class="pagination-item">
-          <button class=" pagination-btn btn-primary">1</button>
+          <Button
+            class="btn-pagination btn-primary"
+            >1</Button
+          >
         </li>
 
         <li class="pagination-item">
-          <button class="pagination-btn btn-forward btn-default">Вперед</button>
+          <Button
+            class="btn-pagination btn-forward btn-default"
+            >Вперед</Button
+          >
         </li>
       </ul>
     </div>
@@ -23,7 +31,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 <style>
