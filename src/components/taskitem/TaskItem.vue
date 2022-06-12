@@ -16,26 +16,12 @@
 
     <div class="item-status">
       <div class="sts" v-bind:class="taskValue.status">
-        {{
-          taskValue.status === "opened"
-            ? "Открыто"
-            : taskValue.status === "inProgress"
-            ? "В работе"
-            : taskValue.status === "testing"
-            ? "Тестирование"
-            : "Сделано"
-        }}
+        {{ statusTask }}
       </div>
     </div>
     <div class="item-priority">
       <div class="priority" v-bind:class="taskValue.rank">
-        {{
-          taskValue.rank === "low"
-            ? "низкий"
-            : taskValue.rank === "medium"
-            ? "средний"
-            : "высокий"
-        }}
+        {{ rankTask }}
       </div>
     </div>
 
@@ -55,36 +41,28 @@
             </button>
             <button
               class="more-link"
-              v-show="taskValue.status === 'opened'"
+              v-show="showInProgress"
               v-on:click="changeStatus('inProgress')"
             >
               Взять в работу
             </button>
             <button
               class="more-link"
-              v-show="taskValue.status === 'inProgress'"
+              v-show="showTesting"
               @click="changeStatus('testing')"
             >
               На тестрование
             </button>
             <button
               class="more-link"
-              v-show="
-                taskValue.status === 'inProgress' ||
-                taskValue.status === 'testing' ||
-                taskValue.status === 'complete'
-              "
+              v-show="showOpened"
               @click="changeStatus('opened')"
             >
               Переоткрыть
             </button>
             <button
               class="more-link"
-              v-show="
-                taskValue.status === 'opened' ||
-                taskValue.status === 'inProgress' ||
-                taskValue.status === 'testing'
-              "
+              v-show="showComplete"
               @click="changeStatus('complete')"
             >
               Сделано
@@ -133,6 +111,46 @@ export default {
   computed: {
     ...mapGetters("tasks", ["filter"]),
     ...mapGetters("users", ["usersList"]),
+
+    rankTask() {
+      return this.taskValue.rank === "low"
+        ? "низкий"
+        : this.taskValue.rank === "medium"
+        ? "средний"
+        : "высокий";
+    },
+
+    statusTask() {
+      return this.taskValue.status === "opened"
+        ? "Открыто"
+        : this.taskValue.status === "inProgress"
+        ? "В работе"
+        : this.taskValue.status === "testing"
+        ? "Тестирование"
+        : "Сделано";
+    },
+
+    showInProgress() {
+      return this.taskValue.status === "opened";
+    },
+
+    showTesting() {
+      return this.taskValue.status === "inProgress";
+    },
+    showOpened() {
+      return (
+        this.taskValue.status === "inProgress" ||
+        this.taskValue.status === "testing" ||
+        this.taskValue.status === "complete"
+      );
+    },
+    showComplete() {
+      return (
+        this.taskValue.status === "opened" ||
+        this.taskValue.status === "inProgress" ||
+        this.taskValue.status === "testing"
+      );
+    },
   },
 
   methods: {

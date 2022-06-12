@@ -6,7 +6,7 @@
           v-model="filterForm.type"
           v-bind:list="listType"
           v-bind:name="'Тип'"
-          v-bind:width="'type'"
+          v-bind:widthComp="'type'"
         />
       </div>
 
@@ -22,7 +22,7 @@
           v-model="filterForm.assignedUsers"
           v-bind:list="usersList"
           v-bind:name="'Пользователь'"
-          v-bind:width="'assignedUsers'"
+          v-bind:widthComp="'assignedUsers'"
         />
       </div>
 
@@ -31,7 +31,7 @@
           v-model="filterForm.status"
           v-bind:list="listStatus"
           v-bind:name="'Статус'"
-          v-bind:width="'status'"
+          v-bind:widthComp="'status'"
         />
       </div>
 
@@ -40,7 +40,7 @@
           v-model="filterForm.rank"
           v-bind:list="listRank"
           v-bind:name="'Приоритет'"
-          v-bind:width="'rank'"
+          v-bind:widthComp="'rank'"
         />
       </div>
 
@@ -91,7 +91,7 @@ export default {
       this.setFilter({
         filter: this.filterForm,
         page: 0,
-        limit: 0,
+        limit: 10,
       });
     },
   },

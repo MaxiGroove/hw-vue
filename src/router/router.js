@@ -1,19 +1,20 @@
 import VueRouter from "vue-router";
-import Page404 from '@/pages/page404/page404';
-import Task from '@/components/pagetask/PageTask';
-import TaskList from '@/components/tasklist/TaskList'
-import UserList from '@/components/userlist/UserList'
-import CreateOrEdit from '@/components/createoredit/CreateOrEdit';
-import User from '@/components/user/User';
+import Page404 from '@/views/page404/page404';
+import Task from '@/views/task/Task';
+import TaskList from '@/views/tasklist/TaskList'
+import UserList from '@/views/userlist/UserList'
+import CreateOrEdit from '@/views/createoredit/CreateOrEdit';
+import User from '@/views/user/User';
+import Login from '@/views/login/Login';
 
 Vue.use(VueRouter);
 
 const router = () => {
   return new VueRouter({
     mode: 'hash',
-    routes: [
-      {
+    routes: [{
         path: '/',
+        component: Login,
         name: 'Login',
         props: true,
       },
@@ -49,7 +50,7 @@ const router = () => {
       {
         path: '/task-edit/:id',
         component: CreateOrEdit,
-        name : 'EditTask',
+        name: 'EditTask',
         props: true,
       },
       {

@@ -19,7 +19,12 @@
             :taskValue="task"
           />
         </CardBoard>
-        <Paging />
+        <Paging
+          :limit="tasks.limit"
+          :total="tasks.total"
+          :page="tasks.page"
+          @updatePage="updateNewPage"
+        />
       </Card>
     </div>
   </section>
@@ -37,24 +42,30 @@ export default {
   },
 
   computed: {
-    ...mapGetters("tasks", ["tasks"]),
+    ...mapGetters("tasks", ["tasks", "filter"]),
   },
 
   methods: {
-    ...mapActions("tasks", ["setFilter"]),
+    ...mapActions("tasks", ["fetchTasks", "setFilter"]),
     ...mapActions("users", ["fetchUsers"]),
+
+    updateNewPage(newPage) {
+      this.setFilter({
+        filter: this.filter.filter,
+        page: newPage,
+        limit: 10,
+      });
+    },
   },
 
   mounted() {
     this.setFilter({
       filter: {},
       page: 0,
-      limit: 0,
+      limit: 10,
     });
     this.fetchUsers();
   },
-
-  watch: {},
 };
 </script>
 

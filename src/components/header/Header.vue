@@ -9,7 +9,7 @@
         />
       </div>
 
-      <div class="header-group-link link-disabled">
+      <div class="header-group-link link-disabled" v-show="!showOnLogin">
         <router-link
           v-bind:to="taskList"
           class="header-lnk"
@@ -24,17 +24,23 @@
         >
       </div>
 
-      <div class="header-profile link-disabled">
-        <span class="header-profile-name">Username</span>
+      <div class="header-profile link-disabled" v-show="!showOnLogin">
+        <span class="header-profile-name">{{ myData.username }}</span>
         <div class="header-profile-photo">
-          <img src="" alt="UserAvatar" class="header-profile-avatar" />
+          <img
+            :src="myData.photoUrl"
+            alt="UserAvatar"
+            class="header-profile-avatar"
+          />
         </div>
 
         <div class="header-profile-menu">
-          <router-link v-bind:to="taskList" class="header-profile-view"
+          <router-link v-bind:to="myProfile" class="header-profile-view"
             >Посмотреть профиль</router-link
           >
-          <button class="header-profile-logout">Выйти из системы</button>
+          <button class="header-profile-logout" @click="logout">
+            Выйти из системы
+          </button>
         </div>
       </div>
     </header>
@@ -42,6 +48,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -51,7 +58,31 @@ export default {
       userList: {
         name: "UserList",
       },
+      myProfile: {
+        name: "User",
+        params: {
+          id: localStorage.getItem("id"),
+        },
+      },
     };
+  },
+
+  computed: {
+    showOnLogin() {
+      return this.$route.name === "Login";
+    },
+    ...mapGetters("users", ["myData"]),
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push({ name: "Login" });
+    },
+    ...mapActions("users", ["getMyData"]),
+  },
+
+  mounted() {
+    this.getMyData(localStorage.getItem("id"));
   },
 };
 </script>

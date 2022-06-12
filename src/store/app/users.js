@@ -6,6 +6,7 @@ export const mutation = {
   SET_USERS: 'SET_USERS',
   SET_USERS_FILTER: 'SET_USERS_FILTER',
   SET_USER_DATA: 'SET_USER_DATA',
+  SET_MY_DATA: 'SET_MY_DATA',
 }
 
 export default {
@@ -22,6 +23,7 @@ export default {
       limit: 0,
     },
     userData: {},
+    myData: {},
 
   },
 
@@ -31,6 +33,7 @@ export default {
     users: state => state.users,
     usersFilter: state => state.usersFilter,
     userData: state => state.userData,
+    myData: state => state.myData,
   },
 
   mutations: {
@@ -48,6 +51,9 @@ export default {
     },
     [mutation.SET_USER_DATA]: (state, data) => {
       state.userData = data;
+    },
+    [mutation.SET_MY_DATA]: (state, data) => {
+      state.myData = data;
     },
   },
 
@@ -76,7 +82,6 @@ export default {
 
     fetchUsersFilter: ({ dispatch, commit }, filter) => {
       dispatch('setLoading', true);
-      console.log(filter);
       api.Events.getUsers(filter).then(({data}) => {
         commit(mutation.SET_USERS, data);
         dispatch('setLoading', false);
@@ -95,6 +100,17 @@ export default {
       })
     },
 
-
+    login: ({ dispatch, commit }, form) => {
+      api.Events.loginUser(form).then(({data}) => {
+        localStorage.setItem('id', data.id);
+        localStorage.setItem('password', form.password);
+      })
+    },
+    
+    getMyData: ({ dispatch, commit}, id) => {
+      api.Events.getUser(id).then(({data}) => {
+        commit(mutation.SET_MY_DATA, data)
+      })
+    }
   }
 }

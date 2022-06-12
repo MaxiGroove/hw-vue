@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown">
-    <div class="dropdown-type" :class="width" v-on:click="active">
+    <div class="dropdown-type" :class="widthComp" v-on:click="active">
       <div class="dropdown-type-text">{{ name }}</div>
 
       <img
@@ -12,7 +12,7 @@
     </div>
     <div class="dropdown-list" v-if="isActive">
       <Checkbox
-        :class="width"
+        :class="widthComp"
         v-for="item in Object.keys(list)"
         :key="item"
         v-bind:item="item"
@@ -36,7 +36,7 @@ export default {
   props: {
     list: Object,
     name: String,
-    width: String,
+    widthComp: String,
   },
   watch: {
     filterForm(value) {

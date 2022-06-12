@@ -40,7 +40,12 @@
                   :show="false"
                 />
               </CardBoard>
-              <Paging />
+              <Paging
+                :limit="tasks.limit"
+                :total="tasks.total"
+                :page="tasks.page"
+                @updatePage="updateNewPage"
+              />
             </div>
           </div>
         </div>
@@ -128,7 +133,7 @@ export default {
     ...mapGetters("tasks", ["tasks", "filter"]),
     ...mapGetters("users", ["userData"]),
     show() {
-      return "6273dcd2d09b551dca87629e" === this.id;
+      return localStorage.getItem("id") === this.id;
     },
   },
   mounted() {
@@ -137,12 +142,12 @@ export default {
         assignedUsers: this.id,
       },
       page: 0,
-      limit: 0,
+      limit: 5,
     });
     this.getUserData(this.id);
   },
   methods: {
-    ...mapActions("tasks", ["setFilter"]),
+    ...mapActions("tasks", ["setFilter", "fetchTasks"]),
     ...mapActions("users", ["getUserData", "editUser"]),
     active() {
       this.isActive = !this.isActive;
@@ -152,11 +157,18 @@ export default {
       this.editUser(this.userForm);
       this.active();
     },
+    updateNewPage(newPage) {
+      this.fetchTasks({
+        filter: { assignedUsers: this.id },
+        page: newPage,
+        limit: 5,
+      });
+    },
   },
   watch: {
     userData() {
       this.userForm = { ...this.userData };
-      this.userForm.password = "1Q2w3e4r5t";
+      this.userForm.password = localStorage.getItem("password");
     },
   },
 };

@@ -13,7 +13,12 @@
             :userValue="user"
           />
         </CardBoard>
-        <Paging />
+        <Paging
+          :limit="users.limit"
+          :total="users.total"
+          :page="users.page"
+          @updatePage="updateNewPage"
+        />
       </Card>
     </div>
   </section>
@@ -26,7 +31,7 @@ export default {
     this.fetchUsersFilter({
       filter: {},
       page: 0,
-      limit: 0,
+      limit: 10,
     });
   },
   computed: {
@@ -34,6 +39,14 @@ export default {
   },
   methods: {
     ...mapActions("users", ["fetchUsersFilter"]),
+
+    updateNewPage(newPage) {
+      this.fetchUsersFilter({
+        filter: {},
+        page: newPage,
+        limit: 10,
+      });
+    },
   },
 };
 </script>
