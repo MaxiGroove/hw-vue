@@ -2,9 +2,7 @@
   <section class="task">
     <div class="task-wrapper">
       <CardHeader>
-        <template v-slot:title>{{
-          id ? "Редактирование" : "Создание"
-        }}</template>
+        <template v-slot:title>{{ showTitle }}</template>
         <template v-slot:btn>
           <Button class="btn-primary" v-on:click="handleSubmit"
             >Сохранить</Button
@@ -89,7 +87,7 @@ export default {
   data() {
     return {
       taskForm: {
-        userId: "6273dcd2d09b551dca87629e",
+        userId: localStorage.getItem("id"),
         assignedId: "",
         title: "",
         description: "",
@@ -119,7 +117,7 @@ export default {
     if (this.id) {
       this.getTask(this.id);
     }
-    
+
     if (this.assignedId) {
       this.taskForm.assignedId = this.assignedId;
     }
@@ -128,13 +126,17 @@ export default {
   computed: {
     ...mapGetters("tasks", ["currentTask"]),
     ...mapGetters("users", ["usersList"]),
+
+    showTitle() {
+      return this.id ? "Редактирование" : "Создание";
+    },
   },
 
   methods: {
     handleSubmit(e) {
       e.preventDefault();
       api.Events.addOrEditTask(this.taskForm).then(() =>
-        this.$router.push("/task-list")
+        this.$router.push({ name: "TaskList" })
       );
     },
 

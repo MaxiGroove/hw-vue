@@ -5,6 +5,7 @@ export const mutation = {
   SET_TASKS: 'SET_TASKS',
   SET_FILTER: 'SET_FILTER',
   SET_CURRENT_TASK: 'SET_CURRENT_TASK',
+  SET_COMMENTS: 'SET_COMMENTS',
 }
 
 export default {
@@ -18,6 +19,7 @@ export default {
       limit: 0,
     },
     currentTask: {},
+    comments: [],
   },
 
   getters: {
@@ -25,6 +27,7 @@ export default {
     tasks: state => state.tasks,
     filter: state => state.filter,
     currentTask: state => state.currentTask,
+    comments: state => state.comments,
   },
 
   mutations: {
@@ -39,6 +42,9 @@ export default {
     },
     [mutation.SET_CURRENT_TASK]: (state, currentTaskData) => {
       state.currentTask = currentTaskData;
+    },
+    [mutation.SET_COMMENTS]: (state, commentsData) => {
+      state.comments = commentsData;
     },
   },
 
@@ -67,5 +73,11 @@ export default {
 			commit(mutation.SET_FILTER, filter)
 			dispatch('fetchTasks', filter);
 		},
+
+    fetchComments: ({dispatch, commit}, id) => {
+      api.Events.getComments(id).then(({data}) => {
+        commit(mutation.SET_COMMENTS, data)
+      })
+    }
   }
 }
